@@ -4,12 +4,14 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 dotenv.config();
 const app = express();
+const authRoutes = require("./routes/authRoutes");
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:5173",
   })
 );
 app.use(express.json());
+app.use("/api/auth", authRoutes);
 app.get("/api/health", (req, res) => {
   res.status(200).json({
     success: true,
